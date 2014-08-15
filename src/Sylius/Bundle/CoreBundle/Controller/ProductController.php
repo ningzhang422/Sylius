@@ -120,6 +120,8 @@ class ProductController extends ResourceController
      * Render product filter form.
      *
      * @param Request $request
+     *
+     * @return Response
      */
     public function filterFormAction(Request $request)
     {
