@@ -60,7 +60,20 @@ class ProductController extends ResourceController
 
         $paginator = $finder->getPaginator();
 
-        return $this->renderResults($taxon, $paginator, 'indexByTaxon.html', $request->get('page', 1), $finder->getFacets(), $config['filters']['facets']);
+        $requestBag = ($request->isMethod('GET'))? $request->query:$request->request;
+
+        return $this->renderResults(
+            $taxon,
+            $paginator,
+            'indexByTaxon.html',
+            $request->get('page', 1),
+            $finder->getFacets(),
+            $config['filters']['facets'],
+            $finder->getFilters(),
+            $requestBag->get('q'),
+            $requestBag->get('search_param'),
+            $this->container->getParameter('sylius_search.request.method')
+        );
     }
 
     /**
@@ -139,7 +152,17 @@ class ProductController extends ResourceController
         return parent::findOr404($request, $criteria);
     }
 
-    private function renderResults(TaxonInterface $taxon, Pagerfanta $results, $template, $page, $facets = null, $facetTags = null)
+    private function renderResults(
+        TaxonInterface $taxon,
+        Pagerfanta $results,
+        $template, $page,
+        $facets = null,
+        $facetTags = null,
+        $filters = null,
+        $searchTerm = null,
+        $searchParam = null,
+        $requestMethod = null
+    )
     {
         $results->setCurrentPage($page, true, true);
         $results->setMaxPerPage($this->config->getPaginationMaxPerPage());
@@ -152,6 +175,10 @@ class ProductController extends ResourceController
                 'products' => $results,
                 'facets'   => $facets,
                 'facetTags' => $facetTags,
+                'filters' => $filters,
+                'searchTerm' => $searchTerm,
+                'searchParam' => $searchParam,
+                'requestMethod' => $requestMethod
             ))
         ;
 
