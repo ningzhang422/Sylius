@@ -185,7 +185,6 @@ sylius_search:
                 description: ~
         promotion:
             class: Sylius\Component\Promotion\Model\Promotion
-
             mappings:
                 id: ~
                 name: ~
@@ -278,7 +277,9 @@ fos_elastica:
 
                  promotion:
                      mappings:
-                         name: ~
+                         name:
+                           type: string
+                           index: not_analyzed
                          description: ~
 
                      persistence:
@@ -289,9 +290,3 @@ fos_elastica:
                          provider: ~
                          listener: ~
                          finder: ~
-
-
-                 search_log:
-                    mappings:
-                        search_term: ~
-                        ip_address: ~
