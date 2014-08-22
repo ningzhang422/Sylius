@@ -183,12 +183,6 @@ sylius_search:
                 id: ~
                 name: ~
                 description: ~
-        promotion:
-            class: Sylius\Component\Promotion\Model\Promotion
-            mappings:
-                id: ~
-                name: ~
-                description: ~
 
     custom_accessors:
         - Sylius\Component\Product\Accessor\ProductAccessor
@@ -198,7 +192,7 @@ sylius_search:
             taxonomy: category
         facet_groups:
             search_set:
-                values: [taxons, price, made_of, color, name]
+                values: [taxons, price, made_of, color]
             categories_set:
                 values: [price, made_of, color]
             all_set:
@@ -220,10 +214,6 @@ sylius_search:
                 type: terms
                 value: ~
             color:
-                display_name: 'Available colors'
-                type: terms
-                value: ~
-            name:
                 display_name: 'Available colors'
                 type: terms
                 value: ~
