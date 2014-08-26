@@ -163,11 +163,6 @@ sylius_resource:
             classes:
                 model: Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ODM\PHPCR\PageRepository
-        sylius.search:
-            driver: doctrine/orm
-            classes:
-                model: Sylius\Bundle\SearchBundle\Entity\SearchIndex
-                controller: Sylius\Bundle\SearchBundle\Controller\SearchController
 
 sylius_pricing:
     forms:
